@@ -23,7 +23,7 @@ class SnackTest(TestCase):
 
     def test_thing_content(self):
         self.assertEqual(self.snack.title, 'manakeesh')
-        self.assertEqual(str(self.snack.purshaser), 'joseph')
+        self.assertEqual(str(self.snack.purshaser), 'josephtelfah@icloud.com')
         self.assertEqual(self.snack.description,
                          'Olive oil with fresh an organic Thyme')
 
@@ -32,7 +32,7 @@ class SnackTest(TestCase):
         response = self.client.get(reverse("snack_list"))
         self.assertEqual(response.status_code, expected)
         self.assertContains(response, "manakeesh")
-        self.assertTemplateUsed(response, "snack_list.html")
+        self.assertTemplateUsed(response, "snacks/snack_list.html")
 
     def test_snack_details_view(self):
         expected = 200
@@ -41,7 +41,7 @@ class SnackTest(TestCase):
         self.assertEqual(response.status_code, expected)
         self.assertEqual(no_response.status_code, 404)
         self.assertContains(response, "manakeesh")
-        self.assertTemplateUsed(response, "snack_detail.html")
+        self.assertTemplateUsed(response, "snacks/snack_detail.html")
 
     def test_snack_create_view(self):
         expected = 200
@@ -49,7 +49,7 @@ class SnackTest(TestCase):
                                   'title': 'manakeesh', ' purshaser': self.user, 'description': 'Olive oil with fresh an organic Thyme', })
         self.assertEqual(expected, actual.status_code)
         self.assertContains(actual, 'Olive oil with fresh an organic Thyme')
-        self.assertContains(actual, 'joseph')
+        self.assertContains(actual, 'josephtelfah@icloud.com')
 
     def test_snack_update_view(self):
         expected = 200
